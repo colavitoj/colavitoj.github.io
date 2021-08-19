@@ -1,0 +1,5 @@
+{
+    "domain": "dev-68wzb9bz.us.auth0.com",
+    "clientId": "60f0b34b4900fd00451230f0",
+    "audience": "localhost:5000/api/v1/midb"
+}
