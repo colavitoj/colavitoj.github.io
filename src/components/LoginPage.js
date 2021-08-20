@@ -79,7 +79,7 @@ export default function SignInSide() {
                     </Button>
 
                     <Grid item>
-                        <Link onClick={() => loginWithRedirect()} variant="body2">
+                        <Link onClick={() => loginWithRedirect()}>
                             {"Don't have an account? Sign Up"}
                         </Link>
                     </Grid>
