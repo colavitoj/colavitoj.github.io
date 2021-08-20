@@ -99,6 +99,7 @@ const Item = props => {
     }
 
     const deleteComment = async (id) => {
+
         var userId = user.sub
         ItemService.deleteComment(id)
 
@@ -214,7 +215,7 @@ const Item = props => {
                                     </Typography>
                                     <Typography variant="body2" component="p" className={classes.effectText}>
                                         {item.effect.split("\n").filter(entry => entry.length > 1).map((i, key) => {
-                                            console.log(i)
+
                                             return <li key={key}>{i}</li>;
                                         })}
                                     </Typography>

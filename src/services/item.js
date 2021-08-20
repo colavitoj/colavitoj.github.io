@@ -29,7 +29,7 @@ class ItemDataService {
         return this.http.put("/items", data);
     }
 
-    deleteItem(id, userId) {
+    deleteItem(id, data) {
         return this.http.delete(`/items?id=${id}`, data);
     }
 
