@@ -26,8 +26,8 @@ const CommentBox = (props) => {
                         {date.toUTCString()}
                     </p>
                 </Grid>
-                {console.log(props.userRole)}
-                <Box> {user.sub === props.comment.user_id || props.userRole === "Editor" || props.userRole === "Admin" ? (<Button variant="contained" color="secondary" onClick={() => props.deleteComment(props.comment._id)}> Delete</Button>) : null} </Box>
+                {console.log('update test')}
+                <Box> {user.sub === props.comment.user_id || props.userRole === "Editor" || props.userRole === "Admin" ? (<Button variant="contained" color="secondary" onClick={() => props.deleteComment(props.comment._id, props.comment.user_id)}> Delete</Button>) : null} </Box>
             </Grid>
 
 

@@ -98,10 +98,9 @@ const Item = props => {
             });
     }
 
-    const deleteComment = async (id) => {
+    const deleteComment = async (id, userId) => {
 
-        var userId = user.sub
-        ItemService.deleteComment(id)
+        ItemService.deleteComment(id, userId)
 
 
             .then(response => {
