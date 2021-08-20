@@ -30,8 +30,7 @@ class ItemDataService {
     }
 
     deleteItem(id, userId) {
-        console.log(userId)
-        return this.http.delete(`/items?id=${id}`, { data: { user_id: userId } });
+        return this.http.delete(`/items?id=${id}`, data);
     }
 
     getItemslot(id) {

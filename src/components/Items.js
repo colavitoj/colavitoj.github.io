@@ -81,6 +81,10 @@ const Item = props => {
 
 
     const deleteItem = async (itemId, userId) => {
+
+
+
+
         var userId = user.sub
         ItemService.deleteItem(itemId, userId)
 
@@ -94,9 +98,9 @@ const Item = props => {
             });
     }
 
-    const deleteComment = async (id, userId) => {
+    const deleteComment = async (id) => {
         var userId = user.sub
-        ItemService.deleteComment(id, userId)
+        ItemService.deleteComment(id)
 
 
             .then(response => {
@@ -246,7 +250,7 @@ const Item = props => {
                     {item.comments.length > 0 ? (
                         item.comments.map((comment, index) => {
 
-                            return (<CommentBox key={index} comment={comment} deleteComment={deleteComment} />)
+                            return (<CommentBox key={index} comment={comment} deleteComment={deleteComment} userRole={userRole} />)
                         })) : null}
 
                 </Box>
