@@ -17,9 +17,6 @@ const Profile = () => {
     return (
         <Box>
             <Box className="row align-items-center profile-header">
-                <Box className="col-md-2 mb-3">
-
-                </Box>
                 <div className="col-md text-center text-md-left">
                     <h2>Hello, {nickname}. Welcome to your profile page!</h2>
                     <p className="lead text-muted">You are registered with the email: {email}</p>
