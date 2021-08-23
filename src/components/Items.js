@@ -155,13 +155,15 @@ const Item = props => {
         },
         deleteBtn: {
             marginRight: 10,
+            marginLeft: 10,
             marginTop: 7,
             marginBottom: 7,
             height: 50
         },
         addItemContainer: {
-
             float: "left",
+            padding: 10,
+            margin: 10
         },
         effectText: {
             whiteSpace: 'pre-line',
@@ -237,7 +239,7 @@ const Item = props => {
 
                             </Box>
                             {showAddComment ? (<Box className={classes.addItemContainer} borderTop={2} borderColor={'primary'}><AddComment {...props} alertTrue={alertTrue} buttonStyle={classes.deleteBtn} refreshComments={refreshList} hideCommentBox={() => setShowAddComment(false)} /></Box>) : null}
-                            {showEditItem ? (<Box className={classes.addItemContainer} borderTop={2} borderColor={'primary'}><AddItem {...props} editing={true} currentItem={item} refreshItem={refreshList} hideEditItem={() => setShowEditItem(!showEditItem)} editAlertTrue={() => setEditAlert(true)} /></Box>) : null}
+                            {showEditItem ? (<Card className={classes.addItemContainer} borderTop={2} borderColor={'primary'}><AddItem {...props} editing={true} currentItem={item} refreshItem={refreshList} hideEditItem={() => setShowEditItem(!showEditItem)} editAlertTrue={() => setEditAlert(true)} /></Card>) : null}
                         </Box>
                     </Box>
                 ) : (

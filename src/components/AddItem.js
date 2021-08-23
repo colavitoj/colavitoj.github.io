@@ -64,9 +64,16 @@ const AddItem = props => {
             height: 50
         },
         form: {
-            marginBottom: 10,
+            marginBottom: 5,
             display: 'flex'
+        },
+        label: {
+            paddingBottom: 15
+        },
+        formItem: {
+            paddingBottom: 10
         }
+
 
     }));
 
@@ -122,7 +129,7 @@ const AddItem = props => {
 
 
         <form ref={form} noValidate >
-            <FormLabel htmlFor="description">{editing ? "Edit" : "Create"} Item</FormLabel>
+            <FormLabel className={classes.label} htmlFor="description">{editing ? "Edit an existing" : "Submit a new"} item</FormLabel>
             <FormControl className={classes.form}>
                 <TextField
                     type="text"
@@ -133,6 +140,7 @@ const AddItem = props => {
                     onChange={handleItemnameChange}
                     name="itemname"
                     defaultValue={itemname}
+                    className={classes.formItem}
 
                 />
 
@@ -147,6 +155,7 @@ const AddItem = props => {
                     value={description}
                     onChange={handleDescriptionChange}
                     name="description"
+                    className={classes.formItem}
                 />
 
                 <TextField
@@ -160,6 +169,7 @@ const AddItem = props => {
                     value={effect}
                     onChange={handleEffectChange}
                     name="effect"
+                    className={classes.formItem}
                 />
 
                 <TextField
@@ -186,10 +196,12 @@ const AddItem = props => {
                 </TextField >
             </FormControl>
 
-            {itemname.length > 3 && description.length > 3 && effect.length > 3 && itemslot ? (<Button type="submit" variant="contained" color="secondary" onClick={saveItem} className={classes.submitButton} >
-                Submit
-            </Button>) : null}
-        </form>
+            {
+                itemname.length > 3 && description.length > 3 && effect.length > 3 && itemslot ? (<Button type="submit" variant="contained" color="secondary" onClick={saveItem} className={classes.submitButton} >
+                    Submit
+                </Button>) : null
+            }
+        </form >
     );
 }
 

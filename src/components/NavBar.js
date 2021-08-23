@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginRight: 16,
+        marginLeft: -12
     },
     hide: {
         display: 'none',
@@ -86,7 +87,14 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             color: '#512DA8'
         },
-
+    },
+    rightBar: {
+        marginLeft: "auto",
+        marginRight: -12
+    },
+    title: {
+        textAlign: 'center',
+        flexGrow: 1
     }
 }));
 
@@ -127,45 +135,38 @@ export default function NavBar() {
                     })}
                 >
                     <Toolbar>
-                        <Grid
-                            justifyContent="space-between"
-                            container
-                            spacing={2}>
-                            <IconButton
-                                color="inherit"
-                                aria-label="open drawer"
-                                onClick={handleDrawerOpen}
-                                edge="start"
-                                className={clsx(classes.menuButton, open && classes.hide)}
-                            >
-                                <MenuIcon />
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, open && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+
+
+                        <Typography variant="h6" className={classes.title}>
+                            Dungeon Master's Toolbox
+                        </Typography>
+                        <section className={classes.rightBar}>
+                            <IconButton onClick={handleMenuClick}>
+                                <Avatar src={picture} />
                             </IconButton>
-
-                            <Grid item>
-                                <Typography variant="h6">
-                                    Dungeon Master's Toolbox
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <IconButton onClick={handleMenuClick}>
-                                    <Avatar src={picture} />
-                                </IconButton>
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    getContentAnchorEl={null}
-                                    keepMounted
-                                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                                    transformOrigin={{ vertical: "top", horizontal: "center" }}
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleMenuClose}
-                                >
-                                    <MenuItem button component={Link} to='/profile' className={classes.listColor}> Profile </MenuItem>
-                                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
-                                </Menu>
-
-                            </Grid>
-                        </Grid>
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                getContentAnchorEl={null}
+                                keepMounted
+                                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                                transformOrigin={{ vertical: "top", horizontal: "center" }}
+                                open={Boolean(anchorEl)}
+                                onClose={handleMenuClose}
+                            >
+                                <MenuItem button component={Link} to='/profile' className={classes.listColor}> Profile </MenuItem>
+                                <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                            </Menu>
+                        </section>
                     </Toolbar>
                 </AppBar>
                 <Drawer

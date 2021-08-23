@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import { Link } from '@material-ui/core';
-import CardContent from '@material-ui/core/CardContent';
+import { Typography, Grid, Link, Card, CardContent, Button, makeStyles } from '@material-ui/core/';
 
 
 
@@ -19,6 +14,13 @@ const useStyles = makeStyles({
   cardMedia: {
     width: 120,
     height: 120
+  },
+  linkButton: {
+    textDecoration: 'none',
+    underline: 'none',
+    "&:hover": {
+      color: '#FFFFFF'
+    },
   },
 });
 
@@ -40,14 +42,14 @@ export default function FeaturedPost(props) {
             <Typography variant="subtitle1" paragraph>
               {post.description}
             </Typography>
-            <Typography variant="subtitle1" color="primary">
-              <Link href={post.videoLink}>Watch Here</Link>
-            </Typography>
+
+            <Button variant="contained" color="secondary" underline="none" component={Link} className={classes.linkButton} href={post.videoLink} >Watch Here</Button>
+
           </CardContent>
         </div>
       </Card>
 
-    </Grid>
+    </Grid >
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ItemDataService from "../services/item";
 import { Link } from "react-router-dom";
-import { Box, Container, Card, CardActions, CardContent, Button, Typography, FormControl, TextField, MenuItem, InputLabel, Select } from '@material-ui/core/'
+import { Box, Container, Card, CardActions, CardActionArea, CardContent, Grid, Button, Typography, FormControl, TextField, MenuItem, InputLabel, Select } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 import AddItem from './AddItem'
@@ -85,11 +85,14 @@ const ItemList = props => {
 
     const useStyles = makeStyles((theme) => ({
         root: {
-            maxWidth: 350,
             marginRight: 15,
             marginLeft: 15,
             marginBottom: 25,
             marginTop: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            justifyContent: 'space-between'
         },
         bullet: {
             display: 'inline-block',
@@ -115,12 +118,22 @@ const ItemList = props => {
         },
         selectForm: {
             margin: theme.spacing(1),
-            minWidth: 120,
+            minWidth: 222,
+            "& .MuiFilledInput-root": {
+                background: "#ebebeb"
+            }
         },
-        listColor: {
+        searchForm: {
+            "& .MuiFilledInput-root": {
+                background: "#ebebeb"
+            }
+        },
+        detailBut: {
             "&:hover": {
                 color: '#512DA8'
             },
+            // display: 'flex',
+            // justifyContent: 'flex-start'
         },
         submitButton: {
             marginTop: 7,
@@ -130,11 +143,33 @@ const ItemList = props => {
         addItemContainer: {
 
             float: "left",
+            padding: 10,
+            margin: 10
         },
         effectText: {
             whiteSpace: 'pre-line',
-        }
+        },
+        formContainer: {
+            maxWidth: '50%'
+        },
+        cardActionArea: {
 
+            display: 'flex',
+            flex: '1 0 auto',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            flexDirection: 'column',
+
+        },
+        cardGrid: {
+            borderTop: 2,
+            borderColor: 'primary'
+        },
+        cardClass: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexDirection: 'column'
+        }
     }));
 
     const classes = useStyles();
@@ -162,7 +197,9 @@ const ItemList = props => {
                     alert={alert}
                     text="submitted the item"
                     alertFalse={alertFalse} />) : null}
+            {/* <Card className={classes.formContainer}> */}
             <Box className="row pb-1">
+
                 <form>
                     <TextField
                         InputProps={{
@@ -174,6 +211,8 @@ const ItemList = props => {
                         variant="filled"
                         value={searchName}
                         onChange={onChangeSearchName}
+                        className={classes.searchForm}
+
                     />
 
                     <Button
@@ -199,6 +238,17 @@ const ItemList = props => {
                             id="demo-simple-select-outlined"
                             onChange={onChangeSearchItemslot}
                             label="Itemslot"
+                            MenuProps={{
+                                anchorOrigin: {
+                                    vertical: "bottom",
+                                    horizontal: "left"
+                                },
+                                transformOrigin: {
+                                    vertical: "top",
+                                    horizontal: "left"
+                                },
+                                getContentAnchorEl: null
+                            }}
 
                         >
                             <MenuItem defaultValue="">None</MenuItem>
@@ -234,60 +284,65 @@ const ItemList = props => {
 
                     </Box>
 
-                    {showAddItem ? (<Box className={classes.addItemContainer} borderTop={2} borderColor={'primary'}> <AddItem {...props} alertTrue={alertTrue} hideAddItem={hideAddItem} getAllItems={retrieveItems} /></Box>) : null}
+                    {showAddItem ? (<Card className={classes.addItemContainer} borderTop={2} borderColor={'primary'}> <AddItem {...props} alertTrue={alertTrue} hideAddItem={hideAddItem} getAllItems={retrieveItems} /></Card>) : null}
                 </Box>
 
             </Box>
-            <Box className="row" borderTop={2} borderColor={'primary'}>
-                {items.map((item, index) => {
-                    return (
 
-                        <Card key={index} className={classes.root} variant="outlined"  >
-                            <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+            <Box borderTop={2} borderColor={'primary'}>
+                <Grid container className={classes.cardGrid}>
+                    {items.map((item, index) => {
+                        return (
+                            <Grid item container xs={4} className={classes.cardClass} >
+                                <Card key={index} className={classes.root} variant="outlined"  >
+                                    <CardContent>
+                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
 
-                                </Typography>
-                                <Typography variant="h5" component="h2">
-                                    {item.itemname}
-                                </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
+                                        </Typography>
+                                        <Typography variant="h5" component="h2">
+                                            {item.itemname}
+                                        </Typography>
+                                        <Typography className={classes.pos} color="textSecondary">
 
-                                    {item.itemslot}
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.effectText}>
+                                            {item.itemslot}
+                                        </Typography>
+                                        <Typography variant="body2" component="p" className={classes.effectText}>
 
-                                    <strong>Description:</strong><br /> {item.description}<br /> <br />
-                                    <strong>Effect:</strong><br />
+                                            <strong>Description:</strong><br /> {item.description}<br /> <br />
+                                            <strong>Effect:</strong><br />
 
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.effectText}>
-                                    {item.effect.split("\n").filter(entry => entry.length > 1).map((i, key) => {
+                                        </Typography>
+                                        <Typography variant="body2" component="p" className={classes.effectText}>
+                                            {item.effect.split("\n").filter(entry => entry.length > 1).map((i, key) => {
 
-                                        return <li key={key}>{i}</li>;
-                                    })}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small" className={classes.listColor} component={Link} variant="contained" color="secondary" to={"/item/" + item._id}>
-                                    Show Details
-                                </Button>
-                            </CardActions>
-                        </Card>
-
-
-
-
-
-
-
+                                                return <li key={key}>{i}</li>;
+                                            })}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActionArea >
+                                        <CardActions className={classes.cardActionArea}>
+                                            <Button size="small" className={classes.detailBut} component={Link} variant="contained" color="secondary" to={"/item/" + item._id}>
+                                                Show Details
+                                            </Button>
+                                        </CardActions>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
 
 
 
-                    );
-                })}
 
 
+
+
+
+
+                        );
+                    })}
+
+                </Grid>
             </Box>
+
         </Container >
     );
 }
